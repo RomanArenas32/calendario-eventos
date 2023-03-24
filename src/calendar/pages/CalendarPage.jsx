@@ -7,8 +7,8 @@ import { useState } from "react";
 
 const events = [
   {
-    title: "Cumpleaños del jefe",
-    notes: "Hay que comprar el pastel",
+    title: "Nota de Prueba",
+    notes: "Nota sobre la prueba",
     start: new Date(),
     end: addHours(new Date(), 2),
     bgColor: "#fafafa",
