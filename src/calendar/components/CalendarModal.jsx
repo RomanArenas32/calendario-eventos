@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import { useUiStore } from "../../hooks";
 
 registerLocale("es", es);
 
@@ -23,7 +24,7 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export const CalendarModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const { isDateModalOpen, closeDateModal } = useUiStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formValues, setFormValues] = useState({
     title: "",
@@ -33,9 +34,7 @@ export const CalendarModal = () => {
 
   const titleClass = useMemo(() => {
     if (!formSubmitted) return "";
-    return (formValues.title.length > 0)
-    ? ''
-    :'is-invalid'
+    return formValues.title.length > 0 ? "" : "is-invalid";
   }, [formValues.title, formSubmitted]);
 
   const onInputChange = ({ target }) => {
@@ -53,15 +52,14 @@ export const CalendarModal = () => {
   };
 
   const onCloseModal = () => {
-    console.log("cerrando modal");
-    setIsOpen(false);
+    closeDateModal();
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     setFormSubmitted(true);
 
-    if (formValues.title <= 0 ) {
+    if (formValues.title <= 0) {
       Swal.fire(
         "Coloque los datos correctamente",
         "verifique el titulo y la fecha del evento",
@@ -77,7 +75,7 @@ export const CalendarModal = () => {
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={isDateModalOpen}
       onRequestClose={onCloseModal}
       style={customStyles}
       className="modal"

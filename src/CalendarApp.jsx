@@ -1,10 +1,16 @@
-import { Navbar } from "./calendar/components/Navbar";
+import { BrowserRouter } from "react-router-dom";
 import { AppRouter } from "./router";
+import { Provider } from "react-redux";
+import { store } from "./store";
+
+
 
 export const CalendarApp = () => {
   return (
-    <>
-      <AppRouter />
-    </>
+    <Provider store={store}>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </Provider>
   );
 };
