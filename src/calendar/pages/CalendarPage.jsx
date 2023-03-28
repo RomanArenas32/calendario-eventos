@@ -1,6 +1,6 @@
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import { Calendar } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { CalendarEvent, Navbar, CalendarModal } from "../";
+import { CalendarEvent, Navbar, CalendarModal, FabAddNew } from "../";
 import { localizer, getMessagesES } from "../../helpers";
 import { useState } from "react";
 import { useUiStore, useCalendarStore } from "../../hooks";
@@ -10,8 +10,11 @@ import { useUiStore, useCalendarStore } from "../../hooks";
 
 export const CalendarPage = () => {
 
-  const {events} = useCalendarStore();
   const { openDateModal } = useUiStore();
+
+  const {events, setActiveEvent} = useCalendarStore();
+
+
 
   const [lastView, setLastView] = useState(
     localStorage.getItem("lastView") || "week"
@@ -33,7 +36,7 @@ export const CalendarPage = () => {
   };
 
   const onSelect = (event) => {
-    console.log({ click: event });
+    setActiveEvent(event)
   };
 
   const onViewChange = (event) => {
@@ -62,6 +65,7 @@ export const CalendarPage = () => {
       />
 
       <CalendarModal />
+      <FabAddNew/>
     </>
   );
 };
