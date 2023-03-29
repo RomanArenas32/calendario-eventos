@@ -8,6 +8,7 @@ export const CalendarEvent = ({ event }) => {
   return (
     <>
       <strong>{title}</strong>
+      <br/>
       <strong> - Creado por: {user.name}</strong>
     </>
   );
